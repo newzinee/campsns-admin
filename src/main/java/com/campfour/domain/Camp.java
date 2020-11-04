@@ -16,9 +16,16 @@ public class Camp extends BaseEntity {
     private Long id;
 
     private String name;
+    @Enumerated(EnumType.STRING)
+    private CampTheme campTheme;
     private String campType;
     private Location location;
+
+    @Embedded
     private Address address;
+
+    @Embedded
+    private Thumbnail thumbnail;
 
     // no data. require?
     private String manageNo;
@@ -73,9 +80,10 @@ public class Camp extends BaseEntity {
     private String agencyName;
 
     @Builder
-    public Camp(String name, String campType, Location location, Address address, String phone, int spotNumber, Double siteSize, Double buildSize, Integer capacity, Integer parkingCapacity, String convenienceOptionStr, String safetyOptionStr, String extraOptionStr, String useTime, String charge, String managingAgencyPhone, String managingAgencyName, LocalDate baseDate, String agencyCode, String agencyName) {
+    public Camp(String name, String campType, CampTheme campTheme, Location location, Address address, String phone, int spotNumber, Double siteSize, Double buildSize, Integer capacity, Integer parkingCapacity, String convenienceOptionStr, String safetyOptionStr, String extraOptionStr, String useTime, String charge, String managingAgencyPhone, String managingAgencyName, LocalDate baseDate, String agencyCode, String agencyName) {
         this.name = name;
         this.campType = campType;
+        this.campTheme = campTheme;
         this.location = location;
         this.address = address;
         this.phone = phone;
