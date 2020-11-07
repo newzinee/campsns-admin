@@ -1,87 +1,82 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header" />
-<body>
-<div th:replace="fragments/bodyHeader :: bodyHeader" />
-<div class="container-fluid">
-    <div class="row">
-        <div th:replace="fragments/left :: left " />
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">캠핑 리스트</h1>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>캠핑장명</th>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/defaultLayout">
+
+<th:block layout:fragment="content">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">캠핑 리스트</h1>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>캠핑장명</th>
 <!--                        <th>섬네일</th>-->
-                        <th>캠핑장 타입(기본)</th>
-                        <th>캠핑 담당지</th>
-                        <th>등록일</th>
-                        <th>수정일</th>
-                        <th>데이터 기준일</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="camp : ${camps}"
-                        th:onclick="|javascript:goUrl('@{/camps/{id}(id=${camp.id},page=${camp.number}')|"
-                        class="cursor-pointer">
-                        <td th:text="${camp.id}"></td>
-                        <td th:text="${camp.name}"></td>
+                <th>캠핑장 타입(기본)</th>
+                <th>캠핑 담당지</th>
+                <th>등록일</th>
+                <th>수정일</th>
+                <th>데이터 기준일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="camp : ${camps}"
+                th:onclick="|javascript:goUrl('@{/camps/{id}(id=${camp.id},page=${camp.number}')|"
+                class="cursor-pointer">
+                <td th:text="${camp.id}"></td>
+                <td th:text="${camp.name}"></td>
 <!--                        <td><img th:src="${camp.thumbnail.thumbnailLowDefault()}" class="thumbnail50"></td>-->
-                        <td th:text="${camp.campType}"></td>
-                        <td th:text="${camp.agencyName}"></td>
-                        <td th:text="${#temporals.format(camp.createdDate, 'yyyy-MM-dd')}"></td>
-                        <td th:text="${#temporals.format(camp.modifiedDate, 'yyyy-MM-dd HH:mm')}"></td>
-                        <td th:text="${#temporals.format(camp.baseDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${camp.campType}"></td>
+                <td th:text="${camp.agencyName}"></td>
+                <td th:text="${#temporals.format(camp.createdDate, 'yyyy-MM-dd')}"></td>
+                <td th:text="${#temporals.format(camp.modifiedDate, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${#temporals.format(camp.baseDate, 'yyyy-MM-dd')}"></td>
 
-                    </tr>
-                    <tr th:if="${!camps.hasContent()}">
-                        <td colspan="7"><p class="text-center">목록 없음</p></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <nav class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-center">
-            <ul class="pagination"
-                th:if="${camps.hasContent()}"
-                th:with="number=${camps.number == null ? 0 : camps.number},
-                start=${T(Math).floor(number/10)*10},
-                last=(${start + 9 < camps.totalPages -1 ? start + 9 : camps.totalPages -1})">
-                <li>
-                    <a th:href="@{/camps(page=0)}" aria-label="First">
-                        <span aria-hidden="true">First</span>
-                    </a>
-                </li>
-
-                <li th:class="${camps.first} ? 'disabled'">
-                    <a th:href="${camps.first} ? '' : @{/camps(page=${camps.number -1})}" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                </li>
-
-                <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == camps.number} ? 'active'">
-                    <a th:text="${page+1}" th:href="@{/camps(page=${page})}"></a>
-                </li>
-
-                <li th:class="${camps.last} ? 'disabled'">
-                    <a th:href="${camps.last} ? '' : @{/camps(page=${camps.number +1})}" aria-label="Next">
-                        <span aria-hidden="true">&gt;</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a th:href="@{/camps(page=${camps.totalPages -1})}" aria-label="Last">
-                        <span aria-hidden="true">Last</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+            </tr>
+            <tr th:if="${!camps.hasContent()}">
+                <td colspan="7"><p class="text-center">목록 없음</p></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-</div> <!-- /container -->
+</div>
 
-<div th:replace="fragments/footer :: footer" />
-</body>
+<nav class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main text-center">
+    <ul class="pagination"
+        th:if="${camps.hasContent()}"
+        th:with="number=${camps.number == null ? 0 : camps.number},
+        start=${T(Math).floor(number/10)*10},
+        last=(${start + 9 < camps.totalPages -1 ? start + 9 : camps.totalPages -1})">
+        <li>
+            <a th:href="@{/camps(page=0)}" aria-label="First">
+                <span aria-hidden="true">First</span>
+            </a>
+        </li>
+
+        <li th:class="${camps.first} ? 'disabled'">
+            <a th:href="${camps.first} ? '' : @{/camps(page=${camps.number -1})}" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+
+        <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == camps.number} ? 'active'">
+            <a th:text="${page+1}" th:href="@{/camps(page=${page})}"></a>
+        </li>
+
+        <li th:class="${camps.last} ? 'disabled'">
+            <a th:href="${camps.last} ? '' : @{/camps(page=${camps.number +1})}" aria-label="Next">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/camps(page=${camps.totalPages -1})}" aria-label="Last">
+                <span aria-hidden="true">Last</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+</th:block>
+
 </html>
