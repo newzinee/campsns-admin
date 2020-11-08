@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/defaultLayout">
+
+<th:block layout:fragment="content">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">캠핑장 상세보기</h1>
+
+    <div class="table-responsive" th:object="${camp}">
+        <h2 th:text="*{name}"></h2>
+        <table class="table table-bordered">
+            <tbody>
+            <tr>
+                <th>주제</th>
+                <td th:text="*{campTheme}"></td>
+            </tr>
+            <tr>
+                <th>타입</th>
+                <td th:text="*{campType}"></td>
+            </tr>
+            <tr>
+                <th>위치</th>
+                <td th:text="*{location}"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td th:text="*{address}"></td>
+            </tr>
+            <tr>
+                <th>전화번호</th>
+                <td th:text="*{phone}"></td>
+            </tr>
+            <tr>
+                <th>사이트 수</th>
+                <td th:text="*{spotNumber}"></td>
+            </tr>
+            <tr>
+                <th>부지면적</th>
+                <td th:text="*{siteSize}"></td>
+            </tr>
+            <tr>
+                <th>건축면적</th>
+                <td th:text="*{buildSize}"></td>
+            </tr>
+            <tr>
+                <th>1일 최대 수용 인원수</th>
+                <td th:text="*{capacity}"></td>
+            </tr>
+            <tr>
+                <th>주차장면수</th>
+                <td th:text="*{parkingCapacity}"></td>
+            </tr>
+            <tr>
+                <th>편의시설(Str)</th>
+                <td th:text="*{convenienceOptionStr}"></td>
+            </tr>
+            <tr>
+                <th>안전시설(Str)</th>
+                <td th:text="*{safetyOptionStr}"></td>
+            </tr>
+            <tr>
+                <th>기타부대시설(Str)</th>
+                <td th:text="*{extraOptionStr}"></td>
+            </tr>
+            <tr>
+                <th>이용시간(Str)</th>
+                <td th:text="*{useTime}"></td>
+            </tr>
+            <tr>
+                <th>이용요금(Str)</th>
+                <td th:text="*{charge}"></td>
+            </tr>
+            <tr>
+                <th>관리기관전화번호</th>
+                <td th:text="*{managingAgencyPhone}"></td>
+            </tr>
+            <tr>
+                <th>관리기관명</th>
+                <td th:text="*{managingAgencyName}"></td>
+            </tr>
+            <tr>
+                <th>데이터기준일자</th>
+                <td th:text="*{baseDate}"></td>
+            </tr>
+            <tr>
+                <th>제공기관코드</th>
+                <td th:text="*{agencyCode}"></td>
+            </tr>
+            <tr>
+                <th>제공기관명</th>
+                <td th:text="*{agencyName}"></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</th:block>
+</html>
