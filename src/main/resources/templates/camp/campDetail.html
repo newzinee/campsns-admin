@@ -4,7 +4,7 @@
       layout:decorator="layout/defaultLayout">
 
 <th:block layout:fragment="content">
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">캠핑장 상세보기</h1>
 
     <div class="table-responsive" th:object="${camp}">
@@ -25,7 +25,11 @@
             </tr>
             <tr>
                 <th>주소</th>
-                <td th:text="*{address}"></td>
+                <td>
+                    <p th:text="도로명 +': '+ *{address.getRoadAddr()}"></p>
+                    <p th:text="지번 +': '+ *{address.getJibunAddr()}"></p>
+                    <div id="map" style="width:400px;height:200px;"></div>
+                </td>
             </tr>
             <tr>
                 <th>전화번호</th>
