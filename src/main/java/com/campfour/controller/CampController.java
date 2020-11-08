@@ -1,5 +1,6 @@
 package com.campfour.controller;
 
+import com.campfour.config.KakaoConfig;
 import com.campfour.domain.Camp;
 import com.campfour.repository.CampRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class CampController {
 
     private final CampRepository campRepository;
+    private final KakaoConfig kakaoConfig;
 
     @GetMapping("/camps")
     public String camp(Model model, Pageable pageable) {
@@ -27,6 +29,7 @@ public class CampController {
     public String campDetail(@PathVariable Long id, Model model, Pageable pageable) {
         Camp camp = campRepository.findById(id).orElseThrow();
         model.addAttribute("camp", camp);
+        model.addAttribute("kakaoConfig", kakaoConfig);
         return "camp/campDetail";
     }
 }
