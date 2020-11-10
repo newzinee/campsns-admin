@@ -11,8 +11,8 @@ assignees: treasureBear94
 
 
 ## 할 일 
-[]
-[]
-[]
+- [ ]
+- [ ]
+- [ ]
 
 ## 일정
