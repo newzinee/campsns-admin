@@ -101,4 +101,14 @@
     </div>
 </div>
 </th:block>
+<th:block layout:fragment="script">
+    <script>
+        let loc = {
+            latitude: "[[${camp.location.getLatitude()}]]",
+            longitude: "[[${camp.location.getLongitude()}]]"
+        };
+    </script>
+    <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js(appkey=${kakaoConfig.jsKey})}"></script>
+    <script th:inline="javascript" th:src="@{/js/map.js}"></script>
+</th:block>
 </html>
