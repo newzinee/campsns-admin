@@ -4,7 +4,7 @@
       layout:decorator="layout/defaultLayout">
 
 <th:block layout:fragment="content">
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">캠핑장 상세보기</h1>
 
     <div class="table-responsive" th:object="${camp}">
@@ -98,6 +98,11 @@
 
             </tbody>
         </table>
+    </div>
+
+    <div>
+        <a class="btn btn-default" th:if="${prev != null}" th:href="@{/camps/{id}(id=${prev.id})}" th:text="이전글"></a>
+        <a class="btn btn-default" th:if="${next != null}" th:href="@{/camps/{id}(id=${next.id})}" th:text="다음글"></a>
     </div>
 </div>
 </th:block>
