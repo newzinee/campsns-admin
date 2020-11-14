@@ -32,6 +32,7 @@ public class CampController {
         model.addAttribute("prev", campRepository.findPrevById(id));
         model.addAttribute("next", campRepository.findNextById(id));
         model.addAttribute("camp", camp);
+        model.addAttribute("page", pageable);
         model.addAttribute("kakaoConfig", kakaoConfig);
         return "camp/campDetail";
     }
