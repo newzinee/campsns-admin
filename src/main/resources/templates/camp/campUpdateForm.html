@@ -17,18 +17,17 @@
             </tr>
             <tr>
                 <th>타입</th>
-                <td th:text="*{campType}"></td>
+                <td><input th:type="text" th:value="*{campType}"></td>
             </tr>
             <tr>
                 <th>위치</th>
-                <td th:text="*{location}"></td>
+                <td><input th:type="text" th:value="*{location.latitude}"><input th:type="text" th:value="*{location.longitude}"></td>
             </tr>
             <tr>
                 <th>주소</th>
                 <td>
-                    <p th:text="도로명 +': '+ *{address.getRoadAddr()}"></p>
-                    <p th:text="지번 +': '+ *{address.getJibunAddr()}"></p>
-                    <div id="map" style="width:400px;height:200px;"></div>
+                    <div>도로명: <input th:type="text" th:value="*{address.getRoadAddr()}" size="50"></div>
+                    <div>지 번: <input th:type="text" th:value="*{address.getJibunAddr()}" size="50"></div>
                 </td>
             </tr>
             <tr>
@@ -101,23 +100,8 @@
     </div>
 
     <div>
-        <a class="btn btn-default" th:if="${prev != null}" th:href="@{/camps/{id}(id=${prev.id})}" th:text="이전글"></a>
         <a class="btn btn-default" th:href="@{/camps(page=${page.pageNumber})}" th:text="목록으로"></a>
-        <a class="btn btn-default" th:if="${next != null}" th:href="@{/camps/{id}(id=${next.id})}" th:text="다음글"></a>
-    </div>
-    <div>
-        <a class="btn btn-default" th:href="@{/camps/{id}/form(id=${camp.id})}" th:text="수정하기"></a>
     </div>
 </div>
-</th:block>
-<th:block layout:fragment="script">
-    <script>
-        let loc = {
-            latitude: "[[${camp.location.getLatitude()}]]",
-            longitude: "[[${camp.location.getLongitude()}]]"
-        };
-    </script>
-    <script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js(appkey=${kakaoConfig.jsKey})}"></script>
-    <script th:inline="javascript" th:src="@{/js/map.js}"></script>
 </th:block>
 </html>
