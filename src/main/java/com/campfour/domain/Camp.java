@@ -4,6 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Entity
@@ -16,8 +19,10 @@ public class Camp extends BaseEntity {
     private Long id;
 
     private String name;
-    @Enumerated(EnumType.STRING)
-    private CampTheme campTheme;
+
+    @OneToMany(mappedBy = "camp")
+    private List<Theme> themes = new ArrayList<>();
+
     private String campType;
     private Location location;
 
@@ -80,10 +85,9 @@ public class Camp extends BaseEntity {
     private String agencyName;
 
     @Builder
-    public Camp(String name, String campType, CampTheme campTheme, Location location, Address address, String phone, int spotNumber, Double siteSize, Double buildSize, Integer capacity, Integer parkingCapacity, String convenienceOptionStr, String safetyOptionStr, String extraOptionStr, String useTime, String charge, String managingAgencyPhone, String managingAgencyName, LocalDate baseDate, String agencyCode, String agencyName) {
+    public Camp(String name, String campType, Location location, Address address, String phone, int spotNumber, Double siteSize, Double buildSize, Integer capacity, Integer parkingCapacity, String convenienceOptionStr, String safetyOptionStr, String extraOptionStr, String useTime, String charge, String managingAgencyPhone, String managingAgencyName, LocalDate baseDate, String agencyCode, String agencyName) {
         this.name = name;
         this.campType = campType;
-        this.campTheme = campTheme;
         this.location = location;
         this.address = address;
         this.phone = phone;
@@ -102,5 +106,18 @@ public class Camp extends BaseEntity {
         this.baseDate = baseDate;
         this.agencyCode = agencyCode;
         this.agencyName = agencyName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Camp camp = (Camp) o;
+        return id.equals(camp.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

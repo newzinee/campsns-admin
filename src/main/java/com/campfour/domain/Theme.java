@@ -25,6 +25,9 @@ public class Theme {
     public Theme(Camp camp, CampTheme campTheme) {
         this.camp = camp;
         this.campTheme = campTheme;
+
+        // 양방향 관계를 위한 세팅
+        camp.getThemes().add(this);
     }
 
     public Camp getCamp() {
