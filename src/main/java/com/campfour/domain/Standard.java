@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 사전조사
@@ -20,6 +22,9 @@ public class Standard {
     private Long id;
     private String name;
     private String image;
+
+    @OneToMany(mappedBy = "standard")
+    List<StandardCampTheme> standardCampThemes = new ArrayList<>();
 
     @Builder
     public Standard(String name, String image) {
